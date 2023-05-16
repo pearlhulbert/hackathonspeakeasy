@@ -17,13 +17,19 @@ function MicInput() {
 
   return (
   <div className="MicInput">
-    <p>Recording: {recording}</p>
-    <p>Speaking: {speaking}</p>
-    <p>Transcribing: {transcribing}</p>
-    <p>Transcribed Text: {transcript.text}</p>
-    <button onClick={() => startRecording()}>Start</button>
-    <button onClick={() => pauseRecording()}>Pause</button>
-    <button onClick={() => stopRecording()}>Stop</button>
+    <button onClick={() => startRecording()}>Listen</button>
+      <input type="text" value={transcript.text} style={{
+        width: '1000px',
+        height: '10vh',
+        fontSize: '16px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: '300px',
+        marginTop: '10px'
+        }} />
+    {/* <button onClick={() => pauseRecording()}>Pause</button> */}
+    <button onClick={() => stopRecording()}>Respond</button>
   </div>
   );
 }
