@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 package-lock.json
+# for the openai api key should contain:
+# { "apikey": "SUPERSECRETKEY" }
+/src/openAIkey.json

@@ -1,4 +1,6 @@
+import React from 'react';
 import { useWhisper } from '@chengsokdara/use-whisper'
+import openAIkey from './openAIkey.json';
 
 function MicInput() {
   const {
@@ -10,7 +12,7 @@ function MicInput() {
     startRecording,
     stopRecording,
   } = useWhisper({
-    apiKey: "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", // YOUR_OPEN_AI_TOKEN
+    apiKey: openAIkey['apikey'], // YOUR_OPEN_AI_TOKEN
   })
 
   return (
