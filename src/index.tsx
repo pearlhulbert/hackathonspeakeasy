@@ -11,8 +11,6 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <MicInput />
-    <GenerateResponse />
     <App />
   </React.StrictMode>
 );

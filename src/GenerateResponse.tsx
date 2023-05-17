@@ -83,55 +83,10 @@ class ResponseGenerator {
             return null;
         }
     };
+
 }
 
-function GenerateResponse() {
-    const respgen = new ResponseGenerator();  
-    const [inputValue, setInputValue] = useState('');
-  
 
-
-    useEffect(() => {
-      setInputValue("I do know how to respond to that. but I won't");
-    }, []);
-  
-    function handleResponse() { 
-      clear();
-        const rawcompletion = respgen.getCompletion("April Ludgate from Parks and Rec", "a new coworker", "", "Are we friends?");
-        //var completion = "I'm sorry, I don't know how to respond to that.";
-        rawcompletion.then(res => {
-          if (res != null) {
-            setInputValue(res.content);
-          } else {
-            setInputValue("I do know how to respond to that. but I won't");
-          }
-        });
-    }
   
   
-    const clear = () => {
-      setInputValue('');
-    };
-  
-    return (
-      <div className="GenerateResponse">
-        <input
-          type="text"
-          value={inputValue}
-          style={{
-            width: '1000px',
-            height: '10vh',
-            fontSize: '16px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginLeft: '300px',
-            marginTop: '10px',
-          }}
-        />
-        <button onClick={handleResponse}>Generate</button>
-      </div>
-    );
-  }
-  
-  export default GenerateResponse;
+  export default ResponseGenerator;

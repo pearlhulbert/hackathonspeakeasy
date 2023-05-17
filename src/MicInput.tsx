@@ -1,60 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { useWhisper } from '@chengsokdara/use-whisper';
+import { UseWhisperTranscript } from '@chengsokdara/use-whisper/dist/types';
 import openAIkey from './openAIkey.json';
 
-function MicInput() {
-  const {
-    recording,
-    speaking,
-    transcribing,
-    transcript,
-    pauseRecording,
-    startRecording,
-    stopRecording,
-  } = useWhisper({
-    apiKey: openAIkey['apikey'], // YOUR_OPEN_AI_TOKEN
-  });
 
-  const [inputValue, setInputValue] = useState('');
+class MicInput {
 
-  useEffect(() => {
-    if (transcript && transcript.text) {
-      setInputValue(transcript.text);
-    }
-  }, [transcript]);
+  private apiKey: string;
+  public recording: boolean;
+  public speaking: boolean;
+  public transcribing: boolean;
+  public transcript: UseWhisperTranscript;
+  public pauseRecording: () => void;
+  public startRecording: () => void;
+  public stopRecording: () => void;
 
-  function handleResponse() { 
-    clear();
-    // use mimessage and GPT to generate a response
+  constructor(apiKey: string) {
+    this.apiKey = apiKey;
+    this.recording = false;
+    this.speaking = false;
+    this.transcribing = false;
+    this.transcript = {blob: undefined, text: undefined};
+    this.pauseRecording = () => {};
+    this.startRecording = () => {};
+    this.stopRecording = () => {};
+
+    // Call a method to initialize the Whisper functionality
+    this.initWhisper();
   }
 
+  initWhisper() {
+    // Destructure the necessary variables and functions from useWhisper
+    const { recording, speaking, transcribing, transcript, pauseRecording, startRecording, stopRecording } = useWhisper({
+      apiKey: this.apiKey, // Use the apiKey passed to the class constructor
+    });
 
-  const clear = () => {
-    setInputValue('');
-  };
-
-  return (
-    <div className="MicInput">
-      <button onClick={startRecording}>Listen</button>
-      <button onClick={stopRecording}>Stop</button>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        style={{
-          width: '1000px',
-          height: '10vh',
-          fontSize: '16px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginLeft: '300px',
-          marginTop: '10px',
-        }}
-      />
-      <button onClick={handleResponse}>Respond</button>
-    </div>
-  );
+    // Assign the destructured variables and functions to instance properties
+    this.recording = recording;
+    this.speaking = speaking;
+    this.transcribing = transcribing;
+    this.transcript = transcript;
+    this.pauseRecording = pauseRecording;
+    this.startRecording = startRecording;
+    this.stopRecording = stopRecording;
+  }
 }
 
 export default MicInput;
