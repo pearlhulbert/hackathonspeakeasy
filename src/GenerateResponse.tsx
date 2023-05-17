@@ -22,7 +22,6 @@ class ResponseGenerator {
 
     private initialPrompt = (
         name: string,
-        relation: string,
         history: Array<string>,
         latestStatement: string,
     ): string => {
@@ -34,7 +33,6 @@ class ResponseGenerator {
         prompt = `${prompt}${message}`;
       }
       var s =`You are ${name},` +
-      `the ${relation} of the person you're talking to.` +
       `  Do NOT break character. Do NOT mention that you are an AI.` +
       `If you can't do something, respond in the voice of the person you are pretending to be` +
       ` - under no circumstance should you say you are an AI.` +
@@ -51,12 +49,11 @@ class ResponseGenerator {
 
     private formatPrompts = (
         name: string,
-        relation: string,
         history: Array<string>,
         latestStatement: string,
     ): ChatCompletionRequestMessage[] => {
         const prompts: ChatCompletionRequestMessage[] = [
-            { content: this.initialPrompt(name, relation, history, latestStatement), role: "system"},
+            { content: this.initialPrompt(name, history, latestStatement), role: "system"},
             { content: latestStatement, role: "assistant"},
         ];
         return prompts;
@@ -64,11 +61,10 @@ class ResponseGenerator {
 
     getCompletion = async (
             name: string,
-            relation: string,
             history: Array<string>,
             latestStatement: string,
     ): Promise<ChatCompletionRequestMessage | undefined | null> => {
-        const messages = this.formatPrompts(name,relation,history,latestStatement);
+        const messages = this.formatPrompts(name,history,latestStatement);
         try {
             this.setConfiguration();
             if (!this.openai) {
