@@ -4,6 +4,8 @@ import openAIkey from './openAIkey.json';
 import './App.css';
 import ResponseGenerator from './GenerateResponse';
 import MicInput from './MicInput';
+import people from './messages.json';
+import fs from 'fs';
 
 
 const App: React.FC = () => {
@@ -12,42 +14,51 @@ const App: React.FC = () => {
 
   var input : MicInput = new MicInput(openAIkey['apikey']);
   var response : ResponseGenerator = new ResponseGenerator();
+  var messageHistory: Array<string> = people['history'];
+
     
       useEffect(() => {
         if (input.transcript && input.transcript.text) {
           setInputValue(input.transcript.text);
-        }
-      }, [input.transcript]);
+          var newMessage: string = "**Them**: " + input.transcript.text + "\n";
+          messageHistory.push(newMessage);
+          console.log(messageHistory);
+        }; 
+      }, [input.transcript, messageHistory]);
     
       useEffect(() => {
-        setResponseValue("I do know how to respond to that. but I won't");
+        setResponseValue("");
       }, []);
-    
-      function handleClear() { 
-        clear();
-        // use mimessage and GPT to generate a response
+
+      const clear = () => {
+        setInputValue('');
+      };
+
+
+      function doListen() {
+        input.startRecording();
       }
 
       function handleResponse() { 
-          const rawcompletion = response.getCompletion("April Ludgate from Parks and Rec", "a new coworker", "", inputValue);
-          //var completion = "I'm sorry, I don't know how to respond to that.";
+        input.stopRecording();
+        clear();
+          const rawcompletion = response.getCompletion("April Ludgate from Parks and Rec", "a new coworker", messageHistory, inputValue);
           rawcompletion.then(res => {
             if (res != null) {
               setResponseValue(res.content);
-            } else {
+              var newResponse =  "**You**: " + res.content + "\n";
+              messageHistory.push(newResponse);
+            }
+           else {
               setResponseValue("I do know how to respond to that. but I won't");
             }
           });
       }
     
-      const clear = () => {
-        setInputValue('');
-      };
-
   return (
     <div>
        <div className="MicInput">
-      <button onClick={input.startRecording}>Listen</button>
+      <button onClick={doListen}>Listen</button>
       <button onClick={input.stopRecording}>Stop</button>
       <input
         type="text"
@@ -64,7 +75,7 @@ const App: React.FC = () => {
           marginTop: '10px',
         }}
       />
-      <button onClick={handleClear}>Respond</button>
+      <button onClick={handleResponse}>Respond</button>
       </div>
       <div className="GenerateResponse">
     <input
@@ -81,7 +92,7 @@ const App: React.FC = () => {
         marginTop: '10px',
       }}
     />
-    <button onClick={handleResponse}>Generate</button>
+    {/* <button onClick={handleResponse}>Generate</button> */}
     </div>
     {/* </div>
       <div>

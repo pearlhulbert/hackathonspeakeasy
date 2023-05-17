@@ -23,29 +23,36 @@ class ResponseGenerator {
     private initialPrompt = (
         name: string,
         relation: string,
-        history: string,
+        history: Array<string>,
         latestStatement: string,
     ): string => {
-        const s = `You are ${name},` +
-        `the ${relation} of the person you're talking to.` +
-        `  Do NOT break character. Do NOT mention that you are an AI.` +
-        `If you can't do something, respond in the voice of the person you are pretending to be` +
-        ` - under no circumstance should you say you are an AI.` +
-        `  You should provide emotional and friendly support, and continue the conversation at all costs.` +
-        `  You should reply in the same voice and style, based on their historical voice.` +
-        `  Please match the use of punctuation and tone/style of communicating.` +
-        `  Here are some examples of messages that have been sent that you should learn from:\n\n` +
-        `${history}\n\n` +
-        `**Them**: ${latestStatement}\n` +
-        `**You**:`;
-
-        return s;
+      let prompt = "";
+      console.log(history);
+      for (let i = 0; i < history.length; i++) {
+        const message = history[i];
+        console.log(message);
+        prompt = `${prompt}${message}`;
+      }
+      var s =`You are ${name},` +
+      `the ${relation} of the person you're talking to.` +
+      `  Do NOT break character. Do NOT mention that you are an AI.` +
+      `If you can't do something, respond in the voice of the person you are pretending to be` +
+      ` - under no circumstance should you say you are an AI.` +
+      `  You should provide emotional and friendly support, and continue the conversation at all costs.` +
+      `  You should reply in the same voice and style, based on their historical voice.` +
+      `  Please match the use of punctuation and tone/style of communicating.` +
+      `  Here are some examples of messages that have been sent that you should learn from:\n\n` +
+      `${prompt}\n\n` +
+      `**Them**: ${latestStatement}\n` +
+      `**You**:`;
+      console.log(s);
+      return s;
     };
 
     private formatPrompts = (
         name: string,
         relation: string,
-        history: string,
+        history: Array<string>,
         latestStatement: string,
     ): ChatCompletionRequestMessage[] => {
         const prompts: ChatCompletionRequestMessage[] = [
@@ -58,7 +65,7 @@ class ResponseGenerator {
     getCompletion = async (
             name: string,
             relation: string,
-            history: string,
+            history: Array<string>,
             latestStatement: string,
     ): Promise<ChatCompletionRequestMessage | undefined | null> => {
         const messages = this.formatPrompts(name,relation,history,latestStatement);
@@ -85,8 +92,5 @@ class ResponseGenerator {
     };
 
 }
-
-
-  
   
   export default ResponseGenerator;
