@@ -93,4 +93,4 @@ class ResponseGenerator {
 
 }
   
-  export default ResponseGenerator;
+export default ResponseGenerator;
