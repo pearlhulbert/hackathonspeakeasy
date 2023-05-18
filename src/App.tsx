@@ -8,7 +8,7 @@ import MicInput from './MicInput';
 import people from './messages.json';
 import dospeak from './speak';
 import { green } from '@mui/material/colors';
-import keyboardImage from './virtualkeyboard.png';
+import bgImage from './bgimage.png';
 
 const App: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
@@ -84,21 +84,16 @@ const App: React.FC = () => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'top',
           height: '100vh',
-          backgroundColor: '#62C1C1',
+          backgroundImage: `url(${bgImage})`,
         }}>
-          <div>
-            <Button onClick={doListen} size="large" style={{backgroundColor: 'green', color: 'white'}}>Listen</Button>
-            <Button onClick={input.stopRecording} size="large" style={{backgroundColor: 'red', color: 'white'}}>Stop</Button>
-            <TextField
-              type= "text"
+            <textarea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              style={{ width: '1685px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
+              style={{ width: '1260px', height: '350px', marginLeft: '40px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
             />
-            <Button onClick={handleResponse} style={{backgroundColor: 'orange', color: 'white'}}>Respond</Button>
-          </div>
+            {/* <Button onClick={handleResponse} style={{backgroundColor: 'orange', color: 'white'}}>Respond</Button> */}
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div>
               {audioURL && (
@@ -110,12 +105,9 @@ const App: React.FC = () => {
             <div className="GenerateResponse">
               <textarea
                 value={responseValue}
-                style = {{ width: '1650px', height: '150px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
+                style = {{ width: '1740px', marginTop: '16px', marginLeft: '180px', height: '160px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
               />
             </div>
-          </div>
-          <div style={{ width: '1700px', backgroundColor: '#CCCFCF'}}>
-            <img src={keyboardImage} alt="Virtual Keyboard" style={{ width: '1700px'}} />
           </div>
         </div>
         
