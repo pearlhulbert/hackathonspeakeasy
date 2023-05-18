@@ -6,44 +6,44 @@ import openAIkey from './openAIkey.json';
 
 class MicInput {
 
-  private apiKey: string;
-  public recording: boolean;
-  public speaking: boolean;
-  public transcribing: boolean;
-  public transcript: UseWhisperTranscript;
-  public pauseRecording: () => void;
-  public startRecording: () => void;
-  public stopRecording: () => void;
+    private apiKey: string;
+    public recording: boolean;
+    public speaking: boolean;
+    public transcribing: boolean;
+    public transcript: UseWhisperTranscript;
+    public pauseRecording: () => void;
+    public startRecording: () => void;
+    public stopRecording: () => void;
 
-  constructor(apiKey: string) {
-    this.apiKey = apiKey;
-    this.recording = false;
-    this.speaking = false;
-    this.transcribing = false;
-    this.transcript = {blob: undefined, text: undefined};
-    this.pauseRecording = () => {};
-    this.startRecording = () => {};
-    this.stopRecording = () => {};
+    constructor(apiKey: string) {
+        this.apiKey = apiKey;
+        this.recording = false;
+        this.speaking = false;
+        this.transcribing = false;
+        this.transcript = { blob: undefined, text: undefined };
+        this.pauseRecording = () => { };
+        this.startRecording = () => { };
+        this.stopRecording = () => { };
 
-    // Call a method to initialize the Whisper functionality
-    this.initWhisper();
-  }
+        // Call a method to initialize the Whisper functionality
+        this.initWhisper();
+    }
 
-  initWhisper() {
-    // Destructure the necessary variables and functions from useWhisper
-    const { recording, speaking, transcribing, transcript, pauseRecording, startRecording, stopRecording } = useWhisper({
-      apiKey: this.apiKey, // Use the apiKey passed to the class constructor
-    });
+    initWhisper() {
+        // Destructure the necessary variables and functions from useWhisper
+        const { recording, speaking, transcribing, transcript, pauseRecording, startRecording, stopRecording } = useWhisper({
+            apiKey: this.apiKey, // Use the apiKey passed to the class constructor
+        });
 
-    // Assign the destructured variables and functions to instance properties
-    this.recording = recording;
-    this.speaking = speaking;
-    this.transcribing = transcribing;
-    this.transcript = transcript;
-    this.pauseRecording = pauseRecording;
-    this.startRecording = startRecording;
-    this.stopRecording = stopRecording;
-  }
+        // Assign the destructured variables and functions to instance properties
+        this.recording = recording;
+        this.speaking = speaking;
+        this.transcribing = transcribing;
+        this.transcript = transcript;
+        this.pauseRecording = pauseRecording;
+        this.startRecording = startRecording;
+        this.stopRecording = stopRecording;
+    }
 }
 
 export default MicInput;
