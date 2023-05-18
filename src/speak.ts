@@ -6,9 +6,9 @@ import { useState, useEffect } from 'react';
 
 export const binarytoBlob = (binarydata: string): Blob => {
     const byteArray = new Uint8Array(binarydata.length);
-  
+
     for (let i = 0; i < binarydata.length; i++) {
-      byteArray[i] = binarydata.charCodeAt(i);
+        byteArray[i] = binarydata.charCodeAt(i);
     }
     return new Blob([byteArray], { type: 'audio/mp3' });
 };
@@ -38,15 +38,15 @@ async function dospeak(input: string) {
 async function dospeak(input: string) {
     console.log("input: " + input)
     const options = {
-      method: 'POST',
-      headers: {
-        accept: 'audio/mpeg',
-        'content-type': 'application/json',
-        'xi-api-key': openAIkey['xi-api-key'],
-      },
-      body: JSON.stringify({ 'text': input }),
+        method: 'POST',
+        headers: {
+            accept: 'audio/mpeg',
+            'content-type': 'application/json',
+            'xi-api-key': openAIkey['xi-api-key'],
+        },
+        body: JSON.stringify({ 'text': input }),
     };
-  
+
     const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/' + openAIkey['xi-voice'], options);
     const blob = await response.blob();
     return blob;
