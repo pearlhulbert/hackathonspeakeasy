@@ -110,7 +110,7 @@ const App: React.FC = () => {
             <div className="GenerateResponse">
               <textarea
                 value={responseValue}
-                style = {{ width: '1600px', height: '150px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
+                style = {{ width: '1650px', height: '150px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
               />
             </div>
           </div>
