@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import { Configuration, OpenAIApi } from "openai";
 import axios from "axios";
 import type { ChatCompletionRequestMessage } from "openai/api";

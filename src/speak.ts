@@ -1,7 +1,4 @@
-import axios from "axios";
 import openAIkey from './openAIkey.json';
-import { useState, useEffect } from 'react';
-
 
 
 export const binarytoBlob = (binarydata: string): Blob => {

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextField } from '@mui/material';
-import { useWhisper } from '@chengsokdara/use-whisper';
+import { Button } from '@mui/material';
 import openAIkey from './openAIkey.json';
 import './App.css';
 import ResponseGenerator from './GenerateResponse';
 import MicInput from './MicInput';
 import people from './messages.json';
 import dospeak from './speak';
-import { green } from '@mui/material/colors';
 import bgImage from './bgimage.png';
 
 const App: React.FC = () => {
@@ -77,17 +75,19 @@ const App: React.FC = () => {
                 setResponseValue(people['default response']);
             }
         });
-    }
+      }
 
-    return (
+    
+      return (
         <div style={{
           backgroundImage: `url(${bgImage})`,
           display: 'flex',
-          flexDirection: 'row'
+          flexDirection: 'row',
+          height: '100vh'
         }}>
           <div style = {{ display: 'flex', flexDirection: 'column'}}>
-            <Button onClick={handleResponse} style={{backgroundColor: 'green', color: 'white'}}>Listen</Button>
-            <Button onClick={handleResponse} style={{backgroundColor: 'red', color: 'white'}}>Stop</Button>
+            <button onClick={handleResponse} style={{backgroundColor: 'green', color: 'white', width: ''}}>Listen</button>
+            <button onClick={handleResponse} style={{backgroundColor: 'red', color: 'white'}}>Stop</button>
           </div>
           <div style = {{
             display: 'flex',
@@ -96,15 +96,15 @@ const App: React.FC = () => {
           <textarea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              style={{ width: '1260px', height: '350px', marginLeft: '40px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
+              style={{ width: '1260px', height: '350px', marginLeft: '280px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
             />
             <textarea
                 value={responseValue}
-                style = {{ width: '1740px', marginTop: '16px', marginLeft: '180px', height: '160px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
+                style = {{ width: '1740px', marginTop: '16px', marginLeft: '110px', height: '165px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
               />
               <div>
               {audioURL && (
-                <audio autoPlay key={audioURL}>
+                <audio autoPlay>
                   <source src={audioURL} type="audio/mpeg" />
                 </audio>
               )}
@@ -114,6 +114,9 @@ const App: React.FC = () => {
         </div>
         
       );
+      
+      
+      
 };
 
 export default App;
