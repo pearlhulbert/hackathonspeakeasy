@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Button, TextField } from '@mui/material';
 import { useWhisper } from '@chengsokdara/use-whisper';
 import openAIkey from './openAIkey.json';
 import './App.css';
@@ -6,6 +7,8 @@ import ResponseGenerator from './GenerateResponse';
 import MicInput from './MicInput';
 import people from './messages.json';
 import dospeak from './speak';
+import { green } from '@mui/material/colors';
+import keyboardImage from './virtualkeyboard.png';
 
 const App: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
@@ -27,6 +30,11 @@ const App: React.FC = () => {
       console.error('Error occurred while speaking:', error);
     }
   }
+
+  useEffect(() => { 
+    handleSpeak(responseValue); 
+  }, [responseValue]);
+
 
       useEffect(() => {
         if (input.transcript && input.transcript.text) {
@@ -63,81 +71,54 @@ const App: React.FC = () => {
            else {
               setResponseValue(people['default response']);
            }
-           handleSpeak(responseValue);
           });
       }
 
     
-  return (
-    <div>
-       <div className="MicInput">
-      <button onClick={doListen}>Listen</button>
-      <button onClick={input.stopRecording}>Stop</button>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        style={{
-          width: '1000px',
-          height: '10vh',
-          fontSize: '16px',
+      return (
+        <div style={{
           display: 'flex',
-          justifyContent: 'center',
+          flexDirection: 'column',
           alignItems: 'center',
-          marginLeft: '300px',
-          marginTop: '10px',
-        }}
-      />
-      <button onClick={handleResponse}>Respond</button>
-      </div>
-      <div className="GenerateResponse">
-    <input
-      type="text"
-      value={responseValue}
-      style={{
-        width: '1000px',
-        height: '10vh',
-        fontSize: '16px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: '300px',
-        marginTop: '10px',
-      }}
-    />
-    <div>
-      {audioURL && (
-        <audio autoPlay controls>
-          <source src={audioURL} type="audio/mpeg" />
-        </audio>
-      )}
-    </div>
-    </div>
-    {/* </div>
-      <div>
-      <input type="text" value={inputValue} onChange={handleInputChange} style={{
-        width: '1000px',
-        height: '30vh',
-        fontSize: '16px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: '450px',
-        marginTop: '10px'
-        }} />
-      </div> */}
-      {/* <div image= style={{
-          width: '1000px',
-          height: '70vh',
-          fontSize: '16px',
-          display: 'flex',
           justifyContent: 'center',
-          alignItems: 'center',
-          marginLeft: '450px',
-          marginTop: '10px' }}>
-          </div> */}
-      </div>
-  );
+          height: '100vh',
+          backgroundColor: '#62C1C1',
+        }}>
+          <div>
+            <Button onClick={doListen} size="large" style={{backgroundColor: 'green', color: 'white'}}>Listen</Button>
+            <Button onClick={input.stopRecording} size="large" style={{backgroundColor: 'red', color: 'white'}}>Stop</Button>
+            <TextField
+              type= "text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              style={{ width: '1685px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
+            />
+            <Button onClick={handleResponse} style={{backgroundColor: 'orange', color: 'white'}}>Respond</Button>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div>
+              {audioURL && (
+                <audio autoPlay controls>
+                  <source src={audioURL} type="audio/mpeg" />
+                </audio>
+              )}
+            </div>
+            <div className="GenerateResponse">
+              <textarea
+                value={responseValue}
+                style = {{ width: '1600px', height: '150px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
+              />
+            </div>
+          </div>
+          <div style={{ width: '1700px', backgroundColor: '#CCCFCF'}}>
+            <img src={keyboardImage} alt="Virtual Keyboard" style={{ width: '1700px'}} />
+          </div>
+        </div>
+        
+      );
+      
+      
+      
 };
 
 export default App;
