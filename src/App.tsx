@@ -86,8 +86,8 @@ const App: React.FC = () => {
             height: '100vh'
         }}>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <button onClick={doListen} style={{ backgroundColor: 'green', color: 'white', width: '160px', height: '160px', marginLeft: '180px', marginTop: '8px', fontSize: '20px', borderRadius: '10px', fontWeight: 'bold'}}>Listen</button>
-                <button onClick={input.stopRecording} style={{ backgroundColor: 'red', color: 'white', width: '165px', height: '165px', marginLeft: '179px', marginTop: '15px', fontSize: '20px', borderRadius: '10px', fontWeight: 'bold'}}>Stop</button>
+                <button onClick={doListen} style={{ backgroundColor: 'green', color: 'white', width: '160px', height: '160px', marginLeft: '180px', marginTop: '8px', fontSize: '32px', fontWeight: 'bold', borderRadius: '10px' }}>Listen</button>
+                <button onClick={input.stopRecording} style={{ backgroundColor: 'red', color: 'white', width: '165px', height: '165px', marginLeft: '179px', marginTop: '15px', fontSize: '32px', fontWeight: 'bold', borderRadius: '10px' }}>Stop</button>
             </div>
             <div style={{
                 display: 'flex',
@@ -96,22 +96,22 @@ const App: React.FC = () => {
                 <textarea
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
-                    style={{ width: '1260px', height: '350px', marginLeft: '10px', backgroundColor: 'lightblue', fontSize: '20px', borderRadius: '10px' }}
+                    style={{ width: '1200px', height: '290px', marginLeft: '10px', border: '30px solid lightblue', backgroundColor: 'lightblue', fontSize: '25px', borderRadius: '10px', textAlign: 'center' }}
                 />
                 <textarea
                     value={responseValue}
-                    style={{ width: '1270px', marginTop: '20px', marginLeft: '0px', height: '160px', border: 'none', backgroundColor: 'lightblue', fontSize: '20px', borderRadius: '10px' }}
+                    style={{ width: '1230px', marginTop: '22px', marginLeft: '0px', height: '120px', border: '20px solid lightblue', backgroundColor: 'lightblue', fontSize: '25px', borderRadius: '10px', textAlign: 'center' }}
                 />
                 <div>
                     {audioURL && (
-                        <audio autoPlay>
+                        <audio autoPlay key={audioURL}>
                             <source src={audioURL} type="audio/mpeg" />
                         </audio>
                     )}
                 </div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <button onClick={handleResponse} style={{ backgroundColor: 'orange', color: 'white', width: '160px', height: '160px', marginLeft: '5px', marginTop: '8px', fontSize: '20px', borderRadius: '10px', fontWeight: 'bold'}}>Respond</button>
+                <button onClick={handleResponse} style={{ backgroundColor: 'orange', color: 'white', width: '160px', height: '160px', marginLeft: '5px', marginTop: '8px', fontSize: '32px', fontWeight: 'bold', borderRadius: '10px' }}>Respond</button>
                 <div style={{ backgroundColor: 'lightblue', width: '320px', height: '160px', marginTop: '210px', border: 'none' }}>
                 </div>
             </div>
