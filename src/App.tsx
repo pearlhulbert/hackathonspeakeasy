@@ -17,24 +17,9 @@ const App: React.FC = () => {
   var input : MicInput = new MicInput(openAIkey['apikey']);
   var response : ResponseGenerator = new ResponseGenerator();
   var messageHistory: Array<string> = people['history'];
-
+  var blob: Blob;
     
   const [audioURL, setAudioURL] = useState<string | null>(null); // Initialize the state with a null value
-
-  async function handleSpeak(input: string) {
-    try {
-      const url = await dospeak(input); // Call the dospeak function
-      setAudioURL(url); // Update the audioURL state with the returned URL
-    } catch (error) {
-      // Handle any errors that occurred during the dospeak function call
-      console.error('Error occurred while speaking:', error);
-    }
-  }
-
-  useEffect(() => { 
-    handleSpeak(responseValue); 
-  }, [responseValue]);
-
 
       useEffect(() => {
         if (input.transcript && input.transcript.text) {
@@ -59,6 +44,23 @@ const App: React.FC = () => {
       }
 
       function handleResponse() { 
+        const handleSpeak = async(inputstr: string) => {
+          try {
+            blob = await dospeak(inputstr);
+            //console.log(data);
+            console.log("done speak");
+            //const blob = binarytoBlob(data);
+            console.log(blob);
+            const url = URL.createObjectURL(blob);
+            console.log(url);
+            setAudioURL(url); // Update the audioURL state with the returned URL
+          } catch (error) {
+            // Handle any errors that occurred during the dospeak function call
+            console.error('Error occurred while speaking:', error);
+          }
+        }
+                
+                
         input.stopRecording();
         clear();
           const rawcompletion = response.getCompletion(people['name'], messageHistory, inputValue);
@@ -67,6 +69,8 @@ const App: React.FC = () => {
               setResponseValue(res.content);
               var newResponse =  "**You**: " + res.content + "\n";
               messageHistory.push(newResponse);
+              console.log(newResponse);
+              handleSpeak(res.content);
             }
            else {
               setResponseValue(people['default response']);
@@ -98,7 +102,7 @@ const App: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div>
               {audioURL && (
-                <audio autoPlay controls>
+                <audio autoPlay>
                   <source src={audioURL} type="audio/mpeg" />
                 </audio>
               )}
