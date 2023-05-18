@@ -83,11 +83,12 @@ const App: React.FC = () => {
         <div style={{
           backgroundImage: `url(${bgImage})`,
           display: 'flex',
-          flexDirection: 'row'
+          flexDirection: 'row',
+          height: '100vh'
         }}>
           <div style = {{ display: 'flex', flexDirection: 'column'}}>
-            <Button onClick={handleResponse} style={{backgroundColor: 'green', color: 'white'}}>Listen</Button>
-            <Button onClick={handleResponse} style={{backgroundColor: 'red', color: 'white'}}>Stop</Button>
+            <button onClick={handleResponse} style={{backgroundColor: 'green', color: 'white', width: ''}}>Listen</button>
+            <button onClick={handleResponse} style={{backgroundColor: 'red', color: 'white'}}>Stop</button>
           </div>
           <div style = {{
             display: 'flex',
@@ -96,11 +97,11 @@ const App: React.FC = () => {
           <textarea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              style={{ width: '1260px', height: '350px', marginLeft: '40px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
+              style={{ width: '1260px', height: '350px', marginLeft: '280px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
             />
             <textarea
                 value={responseValue}
-                style = {{ width: '1740px', marginTop: '16px', marginLeft: '180px', height: '160px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
+                style = {{ width: '1740px', marginTop: '16px', marginLeft: '110px', height: '165px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
               />
               <div>
               {audioURL && (
