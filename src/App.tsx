@@ -40,6 +40,7 @@ const App: React.FC = () => {
 
 
       function doListen() {
+        clear();
         input.startRecording();
       }
 
@@ -62,8 +63,8 @@ const App: React.FC = () => {
                 
                 
         input.stopRecording();
-        clear();
-          const rawcompletion = response.getCompletion(people['name'], messageHistory, inputValue);
+        //clear();
+          const rawcompletion = response.getCompletion(people['prompt'], messageHistory, inputValue);
           rawcompletion.then(res => {
             if (res != null) {
               setResponseValue(res.content);
@@ -104,7 +105,7 @@ const App: React.FC = () => {
               />
               <div>
               {audioURL && (
-                <audio autoPlay>
+                <audio autoPlay key={audioURL}>
                   <source src={audioURL} type="audio/mpeg" />
                 </audio>
               )}

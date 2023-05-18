@@ -21,7 +21,7 @@ class ResponseGenerator {
     };
 
     private initialPrompt = (
-        name: string,
+        initialprompt: string,
         history: Array<string>,
         latestStatement: string,
     ): string => {
@@ -32,14 +32,7 @@ class ResponseGenerator {
         console.log(message);
         prompt = `${prompt}${message}`;
       }
-      var s =`You are ${name},` +
-      `  Do NOT break character. Do NOT mention that you are an AI.` +
-      `If you can't do something, respond in the voice of the person you are pretending to be` +
-      ` - under no circumstance should you say you are an AI.` +
-      `  You should provide emotional and friendly support, and continue the conversation at all costs.` +
-      `  You should reply in the same voice and style, based on their historical voice.` +
-      `  Please match the use of punctuation and tone/style of communicating.` +
-      `  Here are some examples of messages that have been sent that you should learn from:\n\n` +
+      var s = `${initialprompt}` +
       `${prompt}\n\n` +
       `**Them**: ${latestStatement}\n` +
       `**You**:`;
@@ -48,23 +41,23 @@ class ResponseGenerator {
     };
 
     private formatPrompts = (
-        name: string,
+        initialprompt: string,
         history: Array<string>,
         latestStatement: string,
     ): ChatCompletionRequestMessage[] => {
         const prompts: ChatCompletionRequestMessage[] = [
-            { content: this.initialPrompt(name, history, latestStatement), role: "system"},
+            { content: this.initialPrompt(initialprompt, history, latestStatement), role: "system"},
             { content: latestStatement, role: "assistant"},
         ];
         return prompts;
     };
 
     getCompletion = async (
-            name: string,
+            initialprompt: string,
             history: Array<string>,
             latestStatement: string,
     ): Promise<ChatCompletionRequestMessage | undefined | null> => {
-        const messages = this.formatPrompts(name,history,latestStatement);
+        const messages = this.formatPrompts(initialprompt,history,latestStatement);
         try {
             this.setConfiguration();
             if (!this.openai) {
