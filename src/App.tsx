@@ -87,8 +87,8 @@ const App: React.FC = () => {
           height: '100vh'
         }}>
           <div style = {{ display: 'flex', flexDirection: 'column'}}>
-            <button onClick={handleResponse} style={{backgroundColor: 'green', color: 'white', width: ''}}>Listen</button>
-            <button onClick={handleResponse} style={{backgroundColor: 'red', color: 'white'}}>Stop</button>
+            <button onClick={handleResponse} style={{backgroundColor: 'green', color: 'white', width: '160px', height: '160px', marginLeft: '180px', marginTop: '8px', fontSize: '20px'}}>Listen</button>
+            <button onClick={handleResponse} style={{backgroundColor: 'red', color: 'white', width: '165px', height: '165px', marginLeft: '179px', marginTop: '15px', fontSize: '20px'}}>Stop</button>
           </div>
           <div style = {{
             display: 'flex',
@@ -97,11 +97,11 @@ const App: React.FC = () => {
           <textarea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              style={{ width: '1260px', height: '350px', marginLeft: '280px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
+              style={{ width: '1260px', height: '350px', marginLeft: '10px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
             />
             <textarea
                 value={responseValue}
-                style = {{ width: '1740px', marginTop: '16px', marginLeft: '110px', height: '165px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
+                style = {{ width: '1000px', marginTop: '16px', marginLeft: '0px', height: '165px', backgroundColor: '#F6F1F0', fontSize: '20px'}}
               />
               <div>
               {audioURL && (
@@ -110,8 +110,12 @@ const App: React.FC = () => {
                 </audio>
               )}
             </div>
-          </div>
-            {/* <Button onClick={handleResponse} style={{backgroundColor: 'orange', color: 'white'}}>Respond</Button> */}
+            </div>
+            <div style = {{display: 'flex', flexDirection: 'column'}}>
+              <button onClick={handleResponse} style={{backgroundColor: 'orange', color: 'white', width: '160px', height: '160px', marginLeft: '5px', marginTop: '8px'}}>Respond</button>
+              <div style = {{backgroundColor : 'lightblue', width: '160px', height: '160px'}}>
+              </div>
+            </div>
         </div>
         
       );
