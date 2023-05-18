@@ -86,8 +86,8 @@ const App: React.FC = () => {
             height: '100vh'
         }}>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <button onClick={doListen} style={{ backgroundColor: 'green', color: 'white', width: '160px', height: '160px', marginLeft: '180px', marginTop: '8px', fontSize: '20px', borderRadius: '10px' }}>Listen</button>
-                <button onClick={input.stopRecording} style={{ backgroundColor: 'red', color: 'white', width: '165px', height: '165px', marginLeft: '179px', marginTop: '15px', fontSize: '20px', borderRadius: '10px' }}>Stop</button>
+                <button onClick={doListen} style={{ backgroundColor: 'green', color: 'white', width: '160px', height: '160px', marginLeft: '180px', marginTop: '8px', fontSize: '20px', borderRadius: '10px', fontWeight: 'bold'}}>Listen</button>
+                <button onClick={input.stopRecording} style={{ backgroundColor: 'red', color: 'white', width: '165px', height: '165px', marginLeft: '179px', marginTop: '15px', fontSize: '20px', borderRadius: '10px', fontWeight: 'bold'}}>Stop</button>
             </div>
             <div style={{
                 display: 'flex',
@@ -111,7 +111,7 @@ const App: React.FC = () => {
                 </div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <button onClick={handleResponse} style={{ backgroundColor: 'orange', color: 'white', width: '160px', height: '160px', marginLeft: '5px', marginTop: '8px', fontSize: '20px', borderRadius: '10px' }}>Respond</button>
+                <button onClick={handleResponse} style={{ backgroundColor: 'orange', color: 'white', width: '160px', height: '160px', marginLeft: '5px', marginTop: '8px', fontSize: '20px', borderRadius: '10px', fontWeight: 'bold'}}>Respond</button>
                 <div style={{ backgroundColor: 'lightblue', width: '320px', height: '160px', marginTop: '210px', border: 'none' }}>
                 </div>
             </div>
