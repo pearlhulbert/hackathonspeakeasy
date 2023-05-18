@@ -75,52 +75,52 @@ const App: React.FC = () => {
                 setResponseValue(people['default response']);
             }
         });
-      }
+    }
 
-    
-      return (
+
+    return (
         <div style={{
-          backgroundImage: `url(${bgImage})`,
-          display: 'flex',
-          flexDirection: 'row',
-          height: '100vh'
-        }}>
-          <div style = {{ display: 'flex', flexDirection: 'column'}}>
-            <button onClick={doListen} style={{backgroundColor: 'green', color: 'white', width: '160px', height: '160px', marginLeft: '180px', marginTop: '8px', fontSize: '20px', borderRadius: '10px'}}>Listen</button>
-            <button onClick={input.stopRecording} style={{backgroundColor: 'red', color: 'white', width: '165px', height: '165px', marginLeft: '179px', marginTop: '15px', fontSize: '20px', borderRadius: '10px'}}>Stop</button>
-          </div>
-          <div style = {{
+            backgroundImage: `url(${bgImage})`,
             display: 'flex',
-            flexDirection: 'column'
-          }}>
-          <textarea
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              style={{ width: '1260px', height: '350px', marginLeft: '10px', backgroundColor: 'lightblue', fontSize: '20px', borderRadius: '10px'}}
-            />
-            <textarea
-                value={responseValue}
-                style = {{ width: '1270px', marginTop: '20px', marginLeft: '0px', height: '160px', border: 'none', backgroundColor: 'lightblue', fontSize: '20px', borderRadius: '10px'}}
-              />
-              <div>
-              {audioURL && (
-                <audio autoPlay>
-                  <source src={audioURL} type="audio/mpeg" />
-                </audio>
-              )}
+            flexDirection: 'row',
+            height: '100vh'
+        }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <button onClick={doListen} style={{ backgroundColor: 'green', color: 'white', width: '160px', height: '160px', marginLeft: '180px', marginTop: '8px', fontSize: '20px', borderRadius: '10px' }}>Listen</button>
+                <button onClick={input.stopRecording} style={{ backgroundColor: 'red', color: 'white', width: '165px', height: '165px', marginLeft: '179px', marginTop: '15px', fontSize: '20px', borderRadius: '10px' }}>Stop</button>
             </div>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column'
+            }}>
+                <textarea
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    style={{ width: '1260px', height: '350px', marginLeft: '10px', backgroundColor: 'lightblue', fontSize: '20px', borderRadius: '10px' }}
+                />
+                <textarea
+                    value={responseValue}
+                    style={{ width: '1270px', marginTop: '20px', marginLeft: '0px', height: '160px', border: 'none', backgroundColor: 'lightblue', fontSize: '20px', borderRadius: '10px' }}
+                />
+                <div>
+                    {audioURL && (
+                        <audio autoPlay>
+                            <source src={audioURL} type="audio/mpeg" />
+                        </audio>
+                    )}
+                </div>
             </div>
-            <div style = {{display: 'flex', flexDirection: 'column'}}>
-              <button onClick={handleResponse} style={{backgroundColor: 'orange', color: 'white', width: '160px', height: '160px', marginLeft: '5px', marginTop: '8px', fontSize: '20px', borderRadius: '10px'}}>Respond</button>
-              <div style = {{backgroundColor : 'lightblue', width: '320px', height: '160px', marginTop: '210px', border: 'none'}}>
-              </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <button onClick={handleResponse} style={{ backgroundColor: 'orange', color: 'white', width: '160px', height: '160px', marginLeft: '5px', marginTop: '8px', fontSize: '20px', borderRadius: '10px' }}>Respond</button>
+                <div style={{ backgroundColor: 'lightblue', width: '320px', height: '160px', marginTop: '210px', border: 'none' }}>
+                </div>
             </div>
         </div>
-        
-      );
-      
-      
-      
+
+    );
+
+
+
 };
 
 export default App;
