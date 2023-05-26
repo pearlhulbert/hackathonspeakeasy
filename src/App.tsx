@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
-import openAIkey from './openAIkey.json';
 import './App.css';
 import ResponseGenerator from './GenerateResponse';
 import MicInput from './MicInput';
@@ -12,7 +11,7 @@ const App: React.FC = () => {
     const [inputValue, setInputValue] = useState('');
     const [responseValue, setResponseValue] = useState('');
 
-    var input: MicInput = new MicInput(openAIkey['apikey']);
+    var input = MicInput();
     var response: ResponseGenerator = new ResponseGenerator();
     var messageHistory: Array<string> = people['history'];
     var blob: Blob;
